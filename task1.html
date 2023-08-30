@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Multi-Page Survey Form</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing:border-box ;
+        }
+          body{
+        font-family:  Arial, sans-serif;
+        background-color:palegreen;
+        }
+        section{
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color:skyblue;
+        }
+        .container{
+        width: 90%;
+        max-width: 400px;
+        background-color:white;
+        margin: 0 auto;
+        padding: 20px;
+        box-shadow: 0px 0px 20px #00000020;
+        border-radius: 8px;
+        }
+        .page{
+        display: none;
+        }
+        .page.active{
+        display: block;
+        }
+        .form-group{
+        width: 100%;
+        margin-top: 20px;
+        }
+        .form-group input{
+        width: 100%;
+        border: 1.5px solid gray;
+        padding: 5px;
+        font-size: 18px;
+        margin-top: 5px;
+        border-radius:4px;
+        }
+        label{
+        display: block;
+        margin-bottom: 10px;
+        }
+        input[type="text"],input[type="radio"]{
+        margin-bottom: 10px;
+        }
+        button.next-btn,
+        button.submit-btn{
+        float:right;
+        margin-top: 20px;
+        padding: 10px 30px;
+        outline: none;
+        background-color: palevioletred;
+        color:white;
+        border: none;
+        cursor: pointer;
+        }
+        button.previous-btn{
+        float:left;
+        margin-top: 20px;
+        padding: 10px 30px;
+        outline: none;
+        background-color: palevioletred;
+        color:white;
+        border: none;
+        cursor: pointer;
+        }
+        button.next-btn{
+        float:right;}
+    
+        </style>
+   <script>
+    function validateForm()
+{
+    let x=document.forms["myForm"]["username"].value;
+    if(x.length<6)
+    {
+        alert("user name should be min 6 characters");
+        return false;
+    }
+    let y=document.forms["myForm"]["password"].value;
+    
+    if (y.length<8)
+    {
+        alert("password should be of min 8 characters");
+        return false;
+
+    }
+    let z=document.forms["myForm"]["phone number"].value;
+    if(isNaN(z))
+    {
+        alert("enter digits only");
+        return false;
+    }
+    let m=document.forms["myForm"]["mail"].value;
+    let atposition=m.indexof("@");
+    let dotposition=m.Lastindexof(".");
+ 
+    if(atposition<1||dotposition<atposition+2||dotposition+2>=m.length)
+        {
+            alert("pls enter a valid email adderes");
+            return false;
+        }
+        return true;
+}
+</script>
+</head>
+<body>
+    <section>
+    <form name="myForm" action="https://formspree.io/f/mdorzngg" onsubmit="validateForm()" method="post">
+        <div class="page page1 active">
+            <div class="form-group">
+            <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Code Alpha Survey Form</h1>
+            <!-- Page 1 questions -->
+        
+                <label>Name:</label>
+                <input type="text"  id="name" name="name" required>
+                </div>
+                <div class="form-group">
+        
+              <label>lastName:</label>
+            <input type="text"  id="lastname" name="lastname" required>
+            </div>
+             <div class="form-group">
+            
+               <label>Age:</label>
+              <input type="text"  id="age" name="age" required>
+            </div>
+           <button type="button" onclick="nextPage()">Next</button>
+            </div>
+            <div class="page page2">
+                <div class="form-group">
+                <label>email:</label>
+                <input type="text" name="email" required>
+                </div> 
+                <div class="form-group">
+                <label for="password">password:</label>
+                <input type="password" name="password" required>
+               </div>
+               <div class="form-group">
+                <label for="phone">phone number:</label>
+                <input type="text" name="phone"required>
+               </div>
+          
+            <button type="button" class="Previous-btn" onclick="prevPage()">Previous</button>
+            <button type="button" class="next-btn" onclick="nextPage()">Next</button>
+            </div>
+        <div class="page page3">
+            
+            <div class="form-group">
+            <label>Gender:</label></div>
+            <div>
+            <label for="male">Male</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="female">Female</label>
+            <input type="radio" id="female" name="gender" value="female">
+            </div>
+            <div class="form-group">
+                <label>which intern would you select from  code alpha?</label>
+                <input type="radio"value="python intern">python intern
+                <input type="radio" value="java intern">java intern
+                <input type="radio" value="cloud computing">cloud computing
+                <input type="radio" value="web development intern">web development intern
+            </div>
+            <div class="form-group">
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" maxlength="50px"></textarea>
+            </div>
+            <button type="button"  class="Previous-btn" onclick="prevPage()">Previous</button>
+        
+            <button type="submit" class="submit-btn">Submit</button>
+        </div>
+        </form>
+
+        </div>
+    </section>
+     
+  
+    <script src="survey.js"></script>
+</body>
+</html> 
